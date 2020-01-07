@@ -7,10 +7,10 @@ export const addLoader = (WrappedComponent, axios) => {
       super(props);
       this.state = {
         loading: false,
-        interceptorsId: null
+        interceptorId: null
       };
 
-      axios.interceptors.request.use(
+      this.state.interceptorId = axios.interceptors.request.use(
         option => {
           this.setState({ loading: true });
           return option;
@@ -21,7 +21,7 @@ export const addLoader = (WrappedComponent, axios) => {
         }
       );
 
-      axios.interceptors.response.use(
+      this.state.interceptorId = axios.interceptors.response.use(
         res => {
           this.setState({ loading: false });
           return res;
